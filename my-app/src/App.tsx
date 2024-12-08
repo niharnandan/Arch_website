@@ -1,6 +1,7 @@
 import React from 'react';
-import { AppBar, Button, Container, Toolbar, Typography } from '@mui/material';
+import { Button, Container, Typography } from '@mui/material';
 import ButtonAppBar from './components/button-app-bar';
+import ImageCarousel from './components/image-carousel';
 const App: React.FC = () => {
   return (
     <div>
@@ -13,6 +14,7 @@ const App: React.FC = () => {
         <Button variant="contained" color="primary">
           MUI Button
         </Button>
+        <ImageCarousel />
       </Container>
     </div>
   );
