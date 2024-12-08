@@ -1,6 +1,5 @@
 import { API_URL } from "./contentfulImages";
 
-const SPACE_ID = process.env.REACT_APP_CONTENTFUL_SPACE_ID;
 const ACCESS_TOKEN = process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN;
 
 export const fetchFirmName = async () => {
