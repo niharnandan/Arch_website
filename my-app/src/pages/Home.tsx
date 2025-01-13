@@ -4,15 +4,7 @@ import ImageBox from '../components/image-box';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
-  root: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100vh',
-    marginTop: '80px',
-    width: '100vw',
-  },
+  temp: {}
 });
 
 const Home: React.FC = () => {
@@ -20,7 +12,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <Typography variant="h3" gutterBottom>
+      <Typography className={classes.temp} variant="h3" gutterBottom>
         Hello, Material-UI with TypeScript!
       </Typography>
       <Button variant="contained" color="primary">
