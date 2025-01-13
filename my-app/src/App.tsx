@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Container, CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -20,9 +20,16 @@ const useStyles = makeStyles({
 });
 
 const App: React.FC = () => {
-  const [darkMode, setDarkMode] = useState<boolean>(true); // State to control dark/light theme
+  // Check localStorage for theme preference or use system default
+  const storedTheme = localStorage.getItem('theme');
+  const initialTheme = storedTheme
+    ? JSON.parse(storedTheme)
+    : window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+  const [theme, setTheme] = useState<boolean>(initialTheme);
   const classes = useStyles();
 
+  // Define dark and light themes
   const darkTheme = createTheme({
     palette: {
       mode: 'dark',
@@ -55,13 +62,18 @@ const App: React.FC = () => {
     },
   });
 
-  // Toggle theme
+  // Update localStorage whenever the theme is toggled
+  useEffect(() => {
+    localStorage.setItem('theme', JSON.stringify(theme));
+  }, [theme]);
+
+  // Toggle theme manually
   const toggleTheme = () => {
-    setDarkMode((prevMode) => !prevMode);
+    setTheme((prevMode) => !prevMode);
   };
 
   return (
-    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+    <ThemeProvider theme={theme ? darkTheme : lightTheme}>
       <CssBaseline />
       <Router>
         <ButtonAppBar toggleTheme={toggleTheme} />
