@@ -1,5 +1,14 @@
 import * as React from 'react';
-import { AppBar, Button, Toolbar, Typography, Box, IconButton, useTheme, useMediaQuery } from '@mui/material';
+import {
+  AppBar,
+  Button,
+  Toolbar,
+  Typography,
+  Box,
+  IconButton,
+  useTheme,
+  useMediaQuery,
+} from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import { fetchFirmName } from '../services/Contentful/contentfulFirmName';
@@ -43,10 +52,10 @@ const ButtonAppBar: React.FC = () => {
               <MenuIcon />
             </IconButton>
           )}
-          <Typography 
-            variant="h6" 
-            component="div" 
-            sx={{ flexGrow: 1, cursor: 'pointer' }} 
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, cursor: 'pointer' }}
             onClick={handleFirmNameClick}
           >
             {firmName}

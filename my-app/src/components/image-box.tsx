@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     maxHeight: '100%',
     objectFit: 'contain',
     transition: 'opacity 1s ease-in-out',
-  }
+  },
 });
 
 const ImageBox: React.FC = () => {
@@ -60,14 +60,10 @@ const ImageBox: React.FC = () => {
 
   return (
     <div>
-      <Paper
-        elevation={3}
-        className={classes.paper}
-        style={{ height: 'auto' }}
-      >
+      <Paper elevation={3} className={classes.paper} style={{ height: 'auto' }}>
         <img
           src={images[currentImageIndex]}
-          alt={`Image ${currentImageIndex + 1}`}
+          alt={`demo ${currentImageIndex + 1}`}
           className={classes.image}
         />
       </Paper>

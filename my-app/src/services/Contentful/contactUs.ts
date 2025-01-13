@@ -1,4 +1,4 @@
-import { API_URL } from "./contentfulImages";
+import { API_URL } from './contentfulImages';
 
 const ACCESS_TOKEN = process.env.REACT_APP_CONTENTFUL_ACCESS_TOKEN;
 
@@ -7,21 +7,27 @@ const CACHE_EXPIRATION_TIME = 1000 * 60 * 60;
 
 const isCacheExpired = (timestamp: number): boolean => {
   const currentTime = Date.now();
-  return (currentTime - timestamp) > CACHE_EXPIRATION_TIME;
+  return currentTime - timestamp > CACHE_EXPIRATION_TIME;
 };
 
 export const fetchContactUs = async () => {
   const cachedData = sessionStorage.getItem(CACHE_KEY);
   const cachedTimestamp = sessionStorage.getItem(`${CACHE_KEY}_timestamp`);
 
-  if (cachedData && cachedTimestamp && !isCacheExpired(Number(cachedTimestamp))) {
+  if (
+    cachedData &&
+    cachedTimestamp &&
+    !isCacheExpired(Number(cachedTimestamp))
+  ) {
     console.log('Returning cached Contact Us data');
     return JSON.parse(cachedData);
   }
 
   try {
     const entryId = '49OGxSZOCsI6KaxZqs8M2u';
-    const response = await fetch(`${API_URL}/${entryId}?access_token=${ACCESS_TOKEN}`);
+    const response = await fetch(
+      `${API_URL}/${entryId}?access_token=${ACCESS_TOKEN}`
+    );
 
     if (!response.ok) {
       throw new Error('Failed to fetch data from Contentful');
