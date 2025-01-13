@@ -5,20 +5,29 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
   paper: {
-    width: '100%',            
-    height: '500px',          
-    overflow: 'hidden',       
-    borderRadius: '8px',      
+    width: '100%',
+    overflow: 'hidden',
+    borderRadius: '8px',
     position: 'relative',
+    maxWidth: '100vw',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  image: {
+    width: 'auto',
+    height: '500px',
+    maxWidth: '100%',
+    maxHeight: '100%',
+    objectFit: 'contain',
+    transition: 'opacity 1s ease-in-out',
   }
-  
-})
+});
 
 const ImageBox: React.FC = () => {
-
   const classes = useStyles();
-  const [images, setImages] = useState<string[]>([]); // Array of image URLs
-  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0); // Index for the current image
+  const [images, setImages] = useState<string[]>([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -35,12 +44,11 @@ const ImageBox: React.FC = () => {
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length); // Loop over images
-    }, 5000); // Change image every 5 seconds
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 5000);
 
-    // Cleanup interval on component unmount
     return () => clearInterval(intervalId);
-  }, [images.length]); // Dependency on images length to avoid unnecessary rerenders
+  }, [images.length]);
 
   if (isLoading) {
     return <Typography>Loading images...</Typography>;
@@ -51,20 +59,16 @@ const ImageBox: React.FC = () => {
   }
 
   return (
-    <div className="image-box-container" style={{ textAlign: 'center' }}>
+    <div>
       <Paper
         elevation={3}
         className={classes.paper}
+        style={{ height: 'auto' }}
       >
         <img
           src={images[currentImageIndex]}
           alt={`Image ${currentImageIndex + 1}`}
-          style={{
-            width: 'auto',            // Ensure image fills the container width
-            height: '100%',           // Ensure image fills the container height
-            objectFit: 'contain',       // Maintain aspect ratio, but crop if needed
-            transition: 'opacity 1s ease-in-out', // Smooth fade transition
-          }}
+          className={classes.image}
         />
       </Paper>
     </div>

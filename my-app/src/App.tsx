@@ -3,15 +3,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Button, Container, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-// Import components
 import ButtonAppBar from './components/button-app-bar';
 import ImageBox from './components/image-box';
 
-// Import page components
 import Home from './pages/Home';
 import ContactUs from './pages/ContactUs';
 
-// Material-UI styles
 const useStyles = makeStyles({
   root: {
     display: 'flex',
@@ -19,6 +16,8 @@ const useStyles = makeStyles({
     alignItems: 'center',
     marginTop: '20px',
     width: '100vw',
+    maxWidth: '100vw',
+    boxSizing: 'border-box',
   },
 });
 
