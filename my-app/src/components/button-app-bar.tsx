@@ -6,19 +6,32 @@ import {
   Typography,
   Box,
   IconButton,
-  useTheme,
-  useMediaQuery,
+  Menu,
+  MenuItem,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import { useNavigate } from 'react-router-dom';
 import { fetchFirmName } from '../services/Contentful/contentfulFirmName';
 import { useEffect, useState } from 'react';
+import useIsMobile from '../services/Contentful/Helpers/isMobile';
+import { makeStyles } from '@mui/styles';
 
-const ButtonAppBar: React.FC = () => {
-  const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
+const useStyles = makeStyles({
+  root: {
+    minWidth: '420px',
+    flexGrow: 1,
+  },
+});
 
+interface ButtonAppBarProps {
+  toggleTheme: () => void;
+}
+
+const ButtonAppBar: React.FC<ButtonAppBarProps> = ({ toggleTheme }) => {
+  const classes = useStyles();
+  const isMobile = useIsMobile();
   const [firmName, setFirmName] = useState<string>('');
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,28 +43,37 @@ const ButtonAppBar: React.FC = () => {
     getFirmName();
   }, []);
 
-  const handleContactUsClick = () => {
-    navigate('/contact');
-  };
-
   const handleFirmNameClick = () => {
     navigate('/');
   };
 
+  // Menu handling functions
+  const handleMenuClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleNavigation = (path: string) => {
+    navigate(path);
+    handleMenuClose();
+  };
+
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          {isSmallScreen && (
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-            >
-              <MenuIcon />
-            </IconButton>
-          )}
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={handleMenuClick}
+          >
+            <MenuIcon />
+          </IconButton>
           <Typography
             variant="h6"
             component="div"
@@ -60,11 +82,68 @@ const ButtonAppBar: React.FC = () => {
           >
             {firmName}
           </Typography>
-          <Button color="inherit" onClick={handleContactUsClick}>
+          {!isMobile && (
+            <Button
+              color="inherit"
+              onClick={() => {
+                navigate('/about');
+              }}
+            >
+              About
+            </Button>
+          )}
+          <Button
+            color="inherit"
+            onClick={() => {
+              navigate('/contact');
+            }}
+          >
             Contact Us
           </Button>
         </Toolbar>
       </AppBar>
+
+      {/* Menu Component */}
+      <Menu
+        anchorEl={anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={handleMenuClose}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+      >
+        {isMobile && (
+          <MenuItem
+            onClick={() => {
+              handleNavigation('/');
+            }}
+          >
+            Home
+          </MenuItem>
+        )}
+        {isMobile && (
+          <MenuItem
+            onClick={() => {
+              handleNavigation('/about');
+            }}
+          >
+            About Us
+          </MenuItem>
+        )}
+        <MenuItem
+          onClick={() => {
+            toggleTheme();
+            handleMenuClose();
+          }}
+        >
+          Change Theme
+        </MenuItem>
+      </Menu>
     </Box>
   );
 };
