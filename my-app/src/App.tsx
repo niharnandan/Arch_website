@@ -13,14 +13,13 @@ const useStyles = makeStyles({
     flexDirection: 'column',
     alignItems: 'center',
     marginTop: '20px',
-    width: '100vw',
+    width: '80vw',
     maxWidth: '100vw',
     boxSizing: 'border-box',
   },
 });
 
 const App: React.FC = () => {
-  // Check localStorage for theme preference or use system default
   const storedTheme = localStorage.getItem('theme');
   const initialTheme = storedTheme
     ? JSON.parse(storedTheme)
@@ -29,7 +28,6 @@ const App: React.FC = () => {
   const [theme, setTheme] = useState<boolean>(initialTheme);
   const classes = useStyles();
 
-  // Define dark and light themes
   const darkTheme = createTheme({
     palette: {
       mode: 'dark',
@@ -62,12 +60,10 @@ const App: React.FC = () => {
     },
   });
 
-  // Update localStorage whenever the theme is toggled
   useEffect(() => {
     localStorage.setItem('theme', JSON.stringify(theme));
   }, [theme]);
 
-  // Toggle theme manually
   const toggleTheme = () => {
     setTheme((prevMode) => !prevMode);
   };

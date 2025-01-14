@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Typography } from '@mui/material';
-import ImageBox from '../components/image-box';
+import ImageSlider from '../components/image-slider';
 
 const Home: React.FC = () => {
   return (
@@ -15,7 +15,9 @@ const Home: React.FC = () => {
       >
         MUI Button
       </Button>
-      <ImageBox />
+      <div>
+        <ImageSlider />
+      </div>
     </>
   );
 };
