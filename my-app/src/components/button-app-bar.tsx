@@ -87,7 +87,7 @@ const ButtonAppBar: React.FC<ButtonAppBarProps> = ({ toggleTheme }) => {
               onClick={() => {
                 navigate('/about');
               }}
-              startIcon={<InfoIcon />}
+              startIcon={<InfoIcon sx={{ marginRight: '-6px' }}/>}
             >
               About
             </Button>
@@ -98,7 +98,7 @@ const ButtonAppBar: React.FC<ButtonAppBarProps> = ({ toggleTheme }) => {
             onClick={() => {
               navigate('/contact');
             }}
-            startIcon={<ConnectWithoutContactIcon />}
+            startIcon={<ConnectWithoutContactIcon sx={{ marginRight: '-6px' }}/>}
           >
             Contact Us
           </Button>
