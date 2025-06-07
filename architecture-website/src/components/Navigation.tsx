@@ -1,16 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, Info, Phone, Home, Moon, Sun } from 'lucide-react';
+import { Menu, X, Info, Phone, Home } from 'lucide-react';
 import { fetchFirmName } from '../services/Contentful/contentfulFirmName';
 import useIsMobile from '../services/Helpers/useIsMobile';
 import { clsx } from 'clsx';
 
-interface NavigationProps {
-  isDark: boolean;
-  toggleTheme: () => void;
-}
-
-const Navigation: React.FC<NavigationProps> = ({ isDark, toggleTheme }) => {
+const Navigation: React.FC = () => {
   const [firmName, setFirmName] = useState<string>('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -65,10 +60,10 @@ const Navigation: React.FC<NavigationProps> = ({ isDark, toggleTheme }) => {
               onClick={() => handleNavigation('/')}
               className="cursor-pointer group flex items-center space-x-2"
             >
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                <span className="text-white font-bold text-sm">A</span>
+              <div className="w-8 h-8 bg-blue-400 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                <span className="text-slate-900 font-bold text-sm">A</span>
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent group-hover:scale-105 transition-transform duration-300">
+              <span className="text-xl font-bold text-blue-400 group-hover:scale-105 transition-transform duration-300">
                 {firmName || 'Architecture Studio'}
               </span>
             </div>
@@ -83,23 +78,14 @@ const Navigation: React.FC<NavigationProps> = ({ isDark, toggleTheme }) => {
                     className={clsx(
                       "flex items-center space-x-2 px-4 py-2 rounded-xl font-medium transition-all duration-300 transform hover:scale-105",
                       isActivePath(path)
-                        ? "bg-blue-500/20 text-blue-600 dark:text-blue-400 shadow-lg"
-                        : "text-slate-700 dark:text-slate-300 hover:bg-white/10 hover:text-blue-600 dark:hover:text-blue-400"
+                        ? "bg-blue-400/20 text-blue-400 shadow-lg"
+                        : "text-slate-300 hover:bg-white/10 hover:text-blue-400"
                     )}
                   >
                     <Icon size={18} />
                     <span>{label}</span>
                   </button>
                 ))}
-                
-                {/* Theme Toggle */}
-                <button
-                  onClick={toggleTheme}
-                  className="p-2 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-white/10 transition-all duration-300 transform hover:scale-110"
-                  aria-label="Toggle theme"
-                >
-                  {isDark ? <Sun size={20} /> : <Moon size={20} />}
-                </button>
               </div>
             )}
 
@@ -107,7 +93,7 @@ const Navigation: React.FC<NavigationProps> = ({ isDark, toggleTheme }) => {
             {isMobile && (
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="p-2 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-white/10 transition-all duration-300 transform hover:scale-110"
+                className="p-2 rounded-xl text-slate-300 hover:bg-white/10 transition-all duration-300 transform hover:scale-110"
                 aria-label="Toggle menu"
               >
                 {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -133,23 +119,14 @@ const Navigation: React.FC<NavigationProps> = ({ isDark, toggleTheme }) => {
                     className={clsx(
                       "w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium transition-all duration-300 text-left",
                       isActivePath(path)
-                        ? "bg-blue-500/20 text-blue-600 dark:text-blue-400 shadow-lg"
-                        : "text-slate-700 dark:text-slate-300 hover:bg-white/10 hover:text-blue-600 dark:hover:text-blue-400"
+                        ? "bg-blue-400/20 text-blue-400 shadow-lg"
+                        : "text-slate-300 hover:bg-white/10 hover:text-blue-400"
                     )}
                   >
                     <Icon size={20} />
                     <span>{label}</span>
                   </button>
                 ))}
-                
-                {/* Mobile Theme Toggle */}
-                <button
-                  onClick={toggleTheme}
-                  className="w-full flex items-center space-x-3 px-4 py-3 rounded-xl font-medium text-slate-700 dark:text-slate-300 hover:bg-white/10 transition-all duration-300 text-left"
-                >
-                  {isDark ? <Sun size={20} /> : <Moon size={20} />}
-                  <span>Toggle {isDark ? 'Light' : 'Dark'} Mode</span>
-                </button>
               </div>
             </div>
           </div>

@@ -92,10 +92,10 @@ const ImageSlider = () => {
 
   if (images.length === 0) {
     return (
-      <div className="relative h-[500px] w-full rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center animate-fade-in">
+      <div className="relative h-[500px] w-full rounded-2xl bg-gradient-to-br from-slate-800 to-slate-900 flex items-center justify-center animate-fade-in">
         <div className="text-center space-y-4">
-          <div className="animate-spin w-8 h-8 border-3 border-blue-500 border-t-transparent rounded-full mx-auto"></div>
-          <p className="text-slate-600 dark:text-slate-400 font-medium">Loading portfolio images...</p>
+          <div className="animate-spin w-8 h-8 border-3 border-blue-400 border-t-transparent rounded-full mx-auto"></div>
+          <p className="text-slate-300 font-medium">Loading portfolio images...</p>
         </div>
       </div>
     );
@@ -117,7 +117,7 @@ const ImageSlider = () => {
             >
               {/* Loading Skeleton */}
               {!imageLoaded[index] && (
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-200 to-slate-300 dark:from-slate-700 dark:to-slate-800 animate-pulse" />
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-700 to-slate-800 animate-pulse" />
               )}
               
               {/* Image */}
@@ -179,19 +179,19 @@ const ImageSlider = () => {
             className={clsx(
               "w-3 h-3 rounded-full transition-all duration-300 transform hover:scale-125",
               index === currentIndex
-                ? "bg-blue-500 dark:bg-blue-400 shadow-lg shadow-blue-500/50"
-                : "bg-slate-300 dark:bg-slate-600 hover:bg-slate-400 dark:hover:bg-slate-500"
+                ? "bg-blue-400 shadow-lg shadow-blue-400/50"
+                : "bg-slate-600 hover:bg-slate-500"
             )}
             aria-label={`Go to image ${index + 1}`}
           />
         ))}
       </div>
 
-      {/* Progress Bar */}
       {isPlaying && (
-        <div className="mt-4 h-1 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
-          <div 
-            className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-progress"
+        <div className="mt-4 h-1 bg-slate-700 rounded-full overflow-hidden">
+          <div
+            key={currentIndex}
+            className="h-full bg-blue-400 rounded-full animate-progress"
           />
         </div>
       )}
