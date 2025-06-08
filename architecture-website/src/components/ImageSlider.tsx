@@ -104,7 +104,7 @@ const ImageSlider = () => {
   return (
     <div className="relative w-full group animate-fade-in">
       {/* Main Slider Container */}
-      <div className="relative h-[500px] w-full overflow-hidden rounded-2xl shadow-2xl bg-black">
+      <div className="relative h-[500px] w-full overflow-hidden rounded-2xl shadow-2xl bg-transparent">
         {/* Image Container */}
         <div 
           className="flex h-full transition-transform duration-700 ease-out"
@@ -125,7 +125,7 @@ const ImageSlider = () => {
                 src={image}
                 alt={`Architecture showcase ${index + 1}`}
                 className={clsx(
-                  "w-full h-full object-cover transition-all duration-500",
+                  "w-full h-full object-contain transition-all duration-500",
                   imageLoaded[index] ? "opacity-100" : "opacity-0"
                 )}
                 onLoad={() => handleImageLoad(index)}

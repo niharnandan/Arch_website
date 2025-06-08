@@ -6,7 +6,7 @@ import useIsMobile from '../services/Helpers/useIsMobile';
 import { clsx } from 'clsx';
 
 const Navigation: React.FC = () => {
-  const [firmName, setFirmName] = useState<string>('');
+  const [firmName, setFirmName] = useState<string>('Architecture Studio');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const navigate = useNavigate();
@@ -61,14 +61,13 @@ const Navigation: React.FC = () => {
               className="cursor-pointer group flex items-center space-x-2"
             >
               <div className="w-8 h-8 bg-blue-400 rounded-lg flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                <span className="text-slate-900 font-bold text-sm">A</span>
+                <span className="text-slate-900 font-bold text-sm">{firmName[0]}</span>
               </div>
               <span className="text-xl font-bold text-blue-400 group-hover:scale-105 transition-transform duration-300">
-                {firmName || 'Architecture Studio'}
+                {firmName}
               </span>
             </div>
 
-            {/* Desktop Navigation */}
             {!isMobile && (
               <div className="hidden md:flex items-center space-x-8">
                 {navItems.map(({ path, label, icon: Icon }) => (
